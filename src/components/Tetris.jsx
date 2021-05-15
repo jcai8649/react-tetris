@@ -18,10 +18,11 @@ import StartButton from "./StartButton";
 const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
+  const [gameStarted, setGameStarted] = useState(false);
 
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
   const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
-  const [score, setScore, rows, setRows, level, setLevel] =
+  const [score, setScore, lines, setRows, level, setLevel] =
     useGameStatus(rowsCleared);
 
   const movePlayer = (dir) => {
@@ -38,13 +39,13 @@ const Tetris = () => {
     setScore(0);
     setRows(0);
     setLevel(1);
+    setGameStarted(true);
   };
 
   const drop = () => {
-    //Increase level when player has cleared 10 rows
-    if (rows > (level + 1) * 10) {
+    //Increase level when player has cleared 10 lines
+    if (lines > (level + 1) * 10) {
       setLevel((prev) => prev + 1);
-
       setDropTime(1000 / (level + 1) + 200);
     }
 
@@ -53,9 +54,9 @@ const Tetris = () => {
     } else {
       //Game Over
       if (player.pos.y < 1) {
-        console.log("GAME OVER!");
         setGameOver(true);
         setDropTime(null);
+        setGameStarted(false);
       }
       updatePlayerPos({ x: 0, y: 0, collided: true });
     }
@@ -74,6 +75,34 @@ const Tetris = () => {
     drop();
   };
 
+  const dropEnd = () => {
+    // setDropTime(null);
+    // console.log(player);
+    // console.log(stage);
+    // let dropDistance;
+    // for (
+    //   let i = player.pos.y + player.tetromino.length - 1;
+    //   i < stage.length;
+    //   ++i
+    // ) {
+    //   if (stage[i][player.pos.x][1] !== "clear" || i === stage.length - 1) {
+    //     dropDistance = i;
+    //     break;
+    //   }
+    // }
+    // console.log(dropDistance);
+    // for (
+    //   let i = player.pos.y + player.tetromino.length + 1;
+    //   i < dropDistance;
+    //   i++
+    // ) {
+    //   drop();
+    // }
+    // if (!gameOver) {
+    //   setDropTime(1000 / (level + 1) + 200);
+    // }
+  };
+
   const move = ({ keyCode }) => {
     if (!gameOver) {
       //left key
@@ -88,6 +117,8 @@ const Tetris = () => {
         //up key
       } else if (keyCode === 38) {
         playerRotate(stage, 1);
+      } else if (keyCode === 90) {
+        dropEnd();
       }
     }
   };
@@ -104,18 +135,19 @@ const Tetris = () => {
       onKeyUp={keyUp}
     >
       <StyledTetris>
-        <Stage stage={stage} />
+        <Stage stage={stage}>
+          <StartButton callback={startGame} started={gameStarted} />
+        </Stage>
         <aside>
           {gameOver ? (
             <Display gameOver={gameOver} text="Game Over" />
           ) : (
             <div>
               <Display text={`Score: ${score}`} />
-              <Display text={`Rows: ${rows}`} />
+              <Display text={`Lines: ${lines}`} />
               <Display text={`Level: ${level}`} />
             </div>
           )}
-          <StartButton callback={startGame} />
         </aside>
       </StyledTetris>
     </StyledTetrisWrapper>

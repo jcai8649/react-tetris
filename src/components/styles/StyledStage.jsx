@@ -13,4 +13,6 @@ export const StyledStage = styled.div`
   width: 100%;
   max-width: 25vw;
   background: #111;
+  outline: none;
+  position: relative;
 `;
