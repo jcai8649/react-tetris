@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const StyledDisplay = styled.div`
   box-sizing: border-box;
-  display: flex;
+  display: ${(props) => (props.started ? "flex" : "hidden")};
   align-items: center;
   margin: 0 0 20px 0;
   padding: 20px;
@@ -14,4 +14,10 @@ export const StyledDisplay = styled.div`
   font-family: Pixel, Arial, Helvetica, sans-serif;
   font-size: 0.8rem;
   opacity: 70%;
+
+  ${(setStage) =>
+    setStage &&
+    css`
+      flex-direction: column;
+    `}
 `;

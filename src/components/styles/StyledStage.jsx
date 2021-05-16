@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const StyledStage = styled.div`
   display: grid;
@@ -15,4 +15,14 @@ export const StyledStage = styled.div`
   background: #111;
   outline: none;
   position: relative;
+
+  ${(props) =>
+    props.height === 6 &&
+    css`
+      margin-top: 2px;
+      grid-template-rows: repeat(
+        ${(props) => props.height},
+        calc(10vw / ${(props) => props.width})
+      );
+    `}
 `;

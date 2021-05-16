@@ -9,6 +9,7 @@ import { usePlayer } from "../hooks/usePlayer";
 import { useStage } from "../hooks/useStage";
 import { useInterval } from "../hooks/useInterval";
 import { useGameStatus } from "../hooks/useGameStatus";
+import { useNext } from "../hooks/useNext";
 
 //Components
 import Stage from "./Stage";
@@ -21,7 +22,14 @@ const Tetris = () => {
   const [gameStarted, setGameStarted] = useState(false);
 
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
-  const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
+  const [nextStage, setNextStage, nextTetro, setNextTetro, getNewRandTetro] =
+    useNext();
+  const [stage, setStage, rowsCleared] = useStage(
+    player,
+    resetPlayer,
+    nextTetro,
+    getNewRandTetro
+  );
   const [score, setScore, lines, setRows, level, setLevel] =
     useGameStatus(rowsCleared);
 
@@ -34,7 +42,7 @@ const Tetris = () => {
     //Reset everything
     setStage(createStage());
     setDropTime(1000);
-    resetPlayer();
+    resetPlayer(nextTetro, getNewRandTetro);
     setGameOver(false);
     setScore(0);
     setRows(0);
@@ -44,9 +52,9 @@ const Tetris = () => {
 
   const drop = () => {
     //Increase level when player has cleared 10 lines
-    if (lines > (level + 1) * 10) {
+    if (lines >= level * 10) {
       setLevel((prev) => prev + 1);
-      setDropTime(1000 / (level + 1) + 200);
+      setDropTime(1000 / level + 200);
     }
 
     if (!isCollision(player, stage, { x: 0, y: 1 })) {
@@ -146,6 +154,10 @@ const Tetris = () => {
               <Display text={`Score: ${score}`} />
               <Display text={`Lines: ${lines}`} />
               <Display text={`Level: ${level}`} />
+              <Display text={`Next: `} setStage={true}>
+                {" "}
+                <Stage next={true} stage={nextStage} started={gameStarted} />
+              </Display>
             </div>
           )}
         </aside>

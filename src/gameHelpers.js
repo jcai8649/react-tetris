@@ -1,9 +1,16 @@
 export const STAGE_WIDTH = 12;
 export const STAGE_HEIGHT = 20;
+export const NEXT_DISPLAY_WIDTH = 5;
+export const NEXT_DISPLAY_HEIGHT = 6;
 
 export const createStage = () =>
   Array.from(Array(STAGE_HEIGHT), () =>
     new Array(STAGE_WIDTH).fill([0, "clear"])
+  );
+
+export const createNext = () =>
+  Array.from(Array(NEXT_DISPLAY_HEIGHT), () =>
+    new Array(NEXT_DISPLAY_WIDTH).fill([0, "clear"])
   );
 
 //check for collisions

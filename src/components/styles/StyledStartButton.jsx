@@ -6,8 +6,13 @@ export const StyledStartButton = styled.button`
   min-height: 30px;
   border-radius: 20px;
   border: none;
-  color: black;
-  background: white;
+  color: white;
+  background: rgb(63, 94, 251);
+  background: radial-gradient(
+    circle,
+    rgba(63, 94, 251, 1) 0%,
+    rgba(70, 238, 252, 1) 100%
+  );
   font-family: Pixel, Arial, Helvetica, sans-serif;
   font-size: 1rem;
   outline: none;
