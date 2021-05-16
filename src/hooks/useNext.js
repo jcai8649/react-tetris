@@ -4,9 +4,9 @@ import { createNext } from "../gameHelpers";
 
 export const useNext = () => {
   const [nextStage, setNextStage] = useState(createNext());
-  const [nextTetro, setNextTetro] = useState(randomTetromino());
+  const [nextTetro, setNextTetro] = useState(TETROMINOS["J"]);
   const X_PADDING = 1;
-  const Y_PADDNG = nextTetro.length <= 3 ? 2 : 1;
+  const Y_PADDING = nextTetro.shape.length <= 3 ? 2 : 1;
 
   useEffect(() => {
     const updateNextStage = (prevNextStage) => {
@@ -17,7 +17,7 @@ export const useNext = () => {
       nextTetro.shape.forEach((row, y) => {
         row.forEach((value, x) => {
           if (value !== 0) {
-            newStage[y + Y_PADDNG][x + X_PADDING] = [value, "merged"];
+            newStage[y + Y_PADDING][x + X_PADDING] = [value, "merged"];
           }
         });
       });
@@ -25,7 +25,7 @@ export const useNext = () => {
     };
 
     setNextStage((prev) => updateNextStage(prev));
-  }, [nextTetro, X_PADDING, Y_PADDNG]);
+  }, [nextTetro, X_PADDING, Y_PADDING]);
 
   const getNewRandTetro = () => {
     setNextTetro(randomTetromino());
