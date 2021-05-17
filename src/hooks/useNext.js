@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { TETROMINOS, randomTetromino } from "../tetrominos";
+import { useEffect, useState, useCallback } from "react";
+import { randomTetromino } from "../tetrominos";
 import { createNext } from "../gameHelpers";
 
 export const useNext = () => {
   const [nextStage, setNextStage] = useState(createNext());
-  const [nextTetro, setNextTetro] = useState(TETROMINOS["J"]);
+  const [nextTetro, setNextTetro] = useState(randomTetromino());
   const X_PADDING = 1;
   const Y_PADDING = nextTetro.shape.length <= 3 ? 2 : 1;
 
@@ -27,8 +27,9 @@ export const useNext = () => {
     setNextStage((prev) => updateNextStage(prev));
   }, [nextTetro, X_PADDING, Y_PADDING]);
 
-  const getNewRandTetro = () => {
+  const getNewRandTetro = useCallback(() => {
     setNextTetro(randomTetromino());
-  };
-  return [nextStage, setNextStage, nextTetro, setNextTetro, getNewRandTetro];
+  }, []);
+
+  return [nextStage, nextTetro, getNewRandTetro];
 };

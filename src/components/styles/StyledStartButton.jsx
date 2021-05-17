@@ -2,8 +2,7 @@ import styled, { css } from "styled-components";
 
 export const StyledStartButton = styled.button`
   box-sizing: border-box;
-  padding: 20px;
-  min-height: 30px;
+  padding: 14px;
   border-radius: 20px;
   border: none;
   color: white;
@@ -18,6 +17,10 @@ export const StyledStartButton = styled.button`
   outline: none;
   cursor: pointer;
   opacity: 80%;
+
+  &:hover {
+    border: 3px white solid;
+  }
 `;
 
 export const StyledStartContainer = styled.div`

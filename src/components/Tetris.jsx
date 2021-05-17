@@ -22,8 +22,7 @@ const Tetris = () => {
   const [gameStarted, setGameStarted] = useState(false);
 
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
-  const [nextStage, setNextStage, nextTetro, setNextTetro, getNewRandTetro] =
-    useNext();
+  const [nextStage, nextTetro, getNewRandTetro] = useNext();
   const [stage, setStage, rowsCleared] = useStage(
     player,
     resetPlayer,
@@ -148,7 +147,7 @@ const Tetris = () => {
         </Stage>
         <aside>
           {gameOver ? (
-            <Display gameOver={gameOver} text="Game Over" />
+            <Display gameOver={gameOver} text="GAMEOVER" />
           ) : (
             <div>
               <Display text={`Score: ${score}`} />
@@ -156,7 +155,11 @@ const Tetris = () => {
               <Display text={`Level: ${level}`} />
               <Display text={`Next: `} setStage={true}>
                 {" "}
-                <Stage next={true} stage={nextStage} started={gameStarted} />
+                <Stage
+                  next={true}
+                  stage={nextStage}
+                  nextStarted={gameStarted}
+                />
               </Display>
             </div>
           )}

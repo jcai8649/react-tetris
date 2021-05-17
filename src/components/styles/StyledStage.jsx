@@ -16,13 +16,22 @@ export const StyledStage = styled.div`
   outline: none;
   position: relative;
 
-  ${(props) =>
-    props.height === 6 &&
+  ${({ height }) =>
+    height === 6 &&
     css`
-      margin-top: 2px;
+      margin-top: 5px;
       grid-template-rows: repeat(
         ${(props) => props.height},
         calc(10vw / ${(props) => props.width})
       );
+
+      border: none;
+      background: white;
+    `}
+
+  ${({ nextStarted }) =>
+    nextStarted === false &&
+    css`
+      visibility: hidden;
     `}
 `;
