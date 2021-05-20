@@ -23,3 +23,9 @@ body {
   font-family: "Pixel";
   src: url("asset/font/Pixel-LCD-7.woff") format("woff");
 }
+
+@media only screen and (max-width: 600px), screen and (max-height: 700px) {
+  body {
+    overflow: auto;
+  }
+}

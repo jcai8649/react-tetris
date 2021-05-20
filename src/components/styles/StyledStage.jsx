@@ -17,7 +17,7 @@ export const StyledStage = styled.div`
   position: relative;
 
   ${({ height }) =>
-    height === 6 &&
+    height === 5 &&
     css`
       margin-top: 5px;
       grid-template-rows: repeat(

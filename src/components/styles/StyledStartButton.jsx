@@ -6,20 +6,17 @@ export const StyledStartButton = styled.button`
   border-radius: 20px;
   border: none;
   color: white;
-  background: rgb(63, 94, 251);
-  background: radial-gradient(
-    circle,
-    rgba(63, 94, 251, 1) 0%,
-    rgba(70, 238, 252, 1) 100%
-  );
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
   font-family: Pixel, Arial, Helvetica, sans-serif;
   font-size: 1rem;
   outline: none;
   cursor: pointer;
-  opacity: 80%;
+  border: 3px white solid;
 
   &:hover {
-    border: 3px white solid;
+    border: 5px white solid;
   }
 `;
 

@@ -19,4 +19,10 @@ export const StyledDisplay = styled.div`
     css`
       flex-direction: column;
     `}
+
+  @media (max-width: 600px) {
+    &:not(:last-of-type) {
+      max-height: 15px;
+    }
+  }
 `;
