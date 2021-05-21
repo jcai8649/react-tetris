@@ -16,8 +16,9 @@ import { useNext } from "../hooks/useNext";
 import Stage from "./Stage";
 import Display from "./Display";
 import StartButton from "./StartButton";
-import LeaderBoardButton from "./LeaderBoardButton";
-import ViewControlButton from "./ViewControlButton";
+import LeaderBoard from "./Leaderboard";
+import ViewControl from "./ViewControl";
+import AddScore from "./AddScore";
 
 const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
@@ -85,57 +86,6 @@ const Tetris = () => {
     drop();
   };
 
-  const dropEnd = () => {
-    // setDropTime(null);
-    // console.log(player);
-    // console.log(stage);
-    // let dropDistance = 20;
-    // let dropPoint = player.pos.y;
-    // const playerEndPoint = new Array(player.tetromino.length).fill(null);
-    // //loop player's tetromino array starting from the end
-    // for (let i = player.tetromino.length - 1; i >= 0; i--) {
-    //   for (let j = 0; j < player.tetromino[i].length; j++) {
-    //     //if the ele is a char and the ele index in playerEndPoint is null
-    //     if (player.tetromino[i][j] !== 0 && playerEndPoint[j] === null) {
-    //       //then push it into the ele index with the array row's index + player's current pos y
-    //       playerEndPoint[j] = player.pos.y + i;
-    //     }
-    //   }
-    // }
-    // console.log(playerEndPoint, player);
-    // //loop the playerEndPoint
-    // for (let i = 0; i < playerEndPoint.length; i++) {
-    //   if (playerEndPoint[i] !== null) {
-    //     //loop the stage starting from the playerEndPoint value with is pos y  to the stage's length
-    //     for (let j = playerEndPoint[i]; j < stage.length; j++) {
-    //       if (
-    //         //check the stage row child array at the playerEndPoint index and index value 1 if it is not clear or stage.length - 1
-    //         stage[j][player.pos.x + i][1] !== "clear" ||
-    //         j === stage.length - 1
-    //       ) {
-    //         //set the new dropDistance if it is less than the current
-    //         if (dropDistance > j) {
-    //           dropDistance = j;
-    //           if (j === stage.length - 1) {
-    //             dropPoint = playerEndPoint[i];
-    //           } else {
-    //             dropPoint = playerEndPoint[i] + 1;
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
-    // console.log("dropDistance", dropDistance, "dropPoint:", dropPoint);
-    // for (let i = dropPoint; i < dropDistance; i++) {
-    //   drop();
-    // }
-    // console.log(dropDistance, stage);
-    // if (!gameOver) {
-    //   setDropTime(1000 / (level + 1) + 200);
-    // }
-  };
-
   const move = ({ keyCode }) => {
     if (!gameOver) {
       //left key
@@ -150,8 +100,6 @@ const Tetris = () => {
         //up key
       } else if (keyCode === 38) {
         playerRotate(stage, 1);
-      } else if (keyCode === 90) {
-        dropEnd(player.pos.y);
       }
     }
   };
@@ -169,22 +117,26 @@ const Tetris = () => {
     >
       <StyledTetris>
         <StyledModalButtonWrapper>
-          <LeaderBoardButton />
-          <ViewControlButton />
+          <LeaderBoard />
+          <ViewControl />
         </StyledModalButtonWrapper>
         <Stage stage={stage}>
           <StartButton callback={startGame} started={gameStarted} />
         </Stage>
         <aside>
           {gameOver ? (
-            <Display gameOver={gameOver} text="GAME OVER" />
+            <>
+              <Display gameOver={gameOver} text="GAME OVER" />
+            </>
           ) : (
             <div>
               <Display text={`Score: ${score}`} />
               <Display text={`Lines: ${lines}`} />
               <Display text={`Level: ${level}`} />
               <Display text={`Next: `} setStage={true}>
-                {" "}
+                <Display>
+                  <AddScore score={score} level={level} lines={lines} />
+                </Display>{" "}
                 <Stage
                   next={true}
                   stage={nextStage}
