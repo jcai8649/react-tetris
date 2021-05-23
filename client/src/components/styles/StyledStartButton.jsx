@@ -35,5 +35,6 @@ export const StyledStartContainer = styled.div`
       opacity: 0;
       top: 40%;
       visibility: hidden;
+      disabled: true;
     `};
 `;

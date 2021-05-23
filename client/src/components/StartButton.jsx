@@ -7,7 +7,9 @@ import {
 const StartButton = ({ callback, started }) => {
   return (
     <StyledStartContainer started={started}>
-      <StyledStartButton onClick={callback}>New Game</StyledStartButton>
+      <StyledStartButton onClick={callback} disabled={started}>
+        New Game
+      </StyledStartButton>
     </StyledStartContainer>
   );
 };

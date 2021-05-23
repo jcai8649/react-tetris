@@ -3,7 +3,7 @@ import { createStage, isCollision } from "../gameHelpers";
 
 //Styled Components
 import { StyledTetrisWrapper, StyledTetris } from "./styles/StyledTetris";
-import { StyledModalButtonWrapper } from "./styles/StyledModalButton";
+import { StyledLeftSideWrapper } from "./styles/StyledLeftSideWrapper";
 
 //Custom hooks
 import { usePlayer } from "../hooks/usePlayer";
@@ -24,6 +24,7 @@ const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
+  const [loadScore, setLoadScore] = useState(true);
 
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
   const [nextStage, nextTetro, getNewRandTetro] = useNext();
@@ -97,7 +98,7 @@ const Tetris = () => {
         //down key
       } else if (keyCode === 40) {
         dropPlayer();
-        //up key
+        //up key (rotate)
       } else if (keyCode === 38) {
         playerRotate(stage, 1);
       }
@@ -116,10 +117,10 @@ const Tetris = () => {
       onKeyUp={keyUp}
     >
       <StyledTetris>
-        <StyledModalButtonWrapper>
-          <LeaderBoard />
+        <StyledLeftSideWrapper>
+          <LeaderBoard setLoadScore={setLoadScore} loadScore={loadScore} />
           <ViewControl />
-        </StyledModalButtonWrapper>
+        </StyledLeftSideWrapper>
         <Stage stage={stage}>
           <StartButton callback={startGame} started={gameStarted} />
         </Stage>
@@ -127,6 +128,14 @@ const Tetris = () => {
           {gameOver ? (
             <>
               <Display gameOver={gameOver} text="GAME OVER" />
+              <Display>
+                <AddScore
+                  score={score}
+                  level={level}
+                  lines={lines}
+                  setLoadScore={setLoadScore}
+                />
+              </Display>{" "}
             </>
           ) : (
             <div>
@@ -134,9 +143,6 @@ const Tetris = () => {
               <Display text={`Lines: ${lines}`} />
               <Display text={`Level: ${level}`} />
               <Display text={`Next: `} setStage={true}>
-                <Display>
-                  <AddScore score={score} level={level} lines={lines} />
-                </Display>{" "}
                 <Stage
                   next={true}
                   stage={nextStage}

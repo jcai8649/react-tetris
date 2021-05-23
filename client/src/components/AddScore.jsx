@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import Loader from "./Loader";
+import Error from "./Error";
 import tetrisServer from "../apis/tetrisServer";
+import {
+  StyledAddScore,
+  StyledInput,
+  StyledSubmit,
+} from "./styles/StyledAddScore";
 
-const AddScore = ({ score, level, lines }) => {
+const AddScore = ({ score, level, lines, setLoadScore }) => {
   const [playerName, setPlayerName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [postSuccess, setPostSuccess] = useState(false);
@@ -21,6 +27,7 @@ const AddScore = ({ score, level, lines }) => {
         score: score,
       });
       setPostSuccess(true);
+      setLoadScore(true);
     } catch (e) {
       setLoadError(true);
     }
@@ -32,25 +39,34 @@ const AddScore = ({ score, level, lines }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <p>Add Your Score</p>
-        <br />
-        <p>Your final stats</p>
-        <p>
-          level: {level}, lines: {lines}, score: {score}
-        </p>
-        <br />
-        <label>name:</label>
-        <input
-          type="text"
-          required
-          onChange={handleChange}
-          value={playerName}
-        />
-        <button>Submit</button>
-      </form>
-    </div>
+    <StyledAddScore>
+      {isLoading ? (
+        <Loader />
+      ) : postSuccess ? (
+        <div>SCORE SUBMITTED!</div>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <p>Submit Your Score</p>
+          <br />
+          <p>Your final stats</p>
+          <br />
+          <p>
+            level: {level} <br /> lines: {lines} <br /> score: {score}
+          </p>
+          <br />
+
+          {loadError ? <Error /> : ""}
+          <label>Player Name:</label>
+          <StyledInput
+            type="text"
+            required
+            onChange={handleChange}
+            value={playerName}
+          />
+          <StyledSubmit>Submit</StyledSubmit>
+        </form>
+      )}
+    </StyledAddScore>
   );
 };
 

@@ -10,28 +10,31 @@ import tetrisServer from "../apis/tetrisServer";
 import Player from "./Player";
 import Loader from "./Loader";
 
-const LeaderBoard = () => {
+const LeaderBoard = ({ setLoadScore, loadScore }) => {
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [loadError, setLoadError] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      setLoadError(false);
-      try {
-        const response = await tetrisServer.get("./posts");
-        setLeaderboardData(
-          [...response.data].sort((a, b) => b.score - a.score)
-        );
-      } catch (e) {
-        setLoadError(true);
-      }
-      setIsLoading(false);
-    };
+    if (loadScore) {
+      const fetchData = async () => {
+        setIsLoading(true);
+        setLoadError(false);
+        try {
+          const response = await tetrisServer.get("./posts");
+          setLeaderboardData(
+            [...response.data].sort((a, b) => b.score - a.score)
+          );
+          setLoadScore(false);
+        } catch (e) {
+          setLoadError(true);
+        }
+        setIsLoading(false);
+      };
 
-    fetchData();
-  }, []);
+      fetchData();
+    }
+  }, [setLoadScore, loadScore]);
 
   const renderData = () => {
     if (isLoading) {
