@@ -19,7 +19,7 @@ export const StyledTetris = styled.div`
 
   aside {
     width: 100%;
-    max-width: 12em;
+    max-width: 15em;
     display: block;
     padding: 0 20px;
   }
@@ -29,5 +29,6 @@ export const StyledTetris = styled.div`
     justify-content: center;
     align-items: center;
     gap: 10px;
+    max-width: 10em;
   }
 `;

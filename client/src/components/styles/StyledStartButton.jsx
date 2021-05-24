@@ -18,6 +18,10 @@ export const StyledStartButton = styled.button`
   &:hover {
     border: 5px white solid;
   }
+
+  @media (max-width: 600px) {
+    font-size: 0.5rem;
+  }
 `;
 
 export const StyledStartContainer = styled.div`
