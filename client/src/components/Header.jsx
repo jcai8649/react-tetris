@@ -10,7 +10,7 @@ const Header = () => {
     <>
       <StyledGithubWrapper>
         <StyledGithubAchor
-          href="https://github.com/jcai8649"
+          href="https://github.com/jcai8649/react-tetris"
           rel="noreferrer"
           target="_blank"
           style={{
