@@ -19,7 +19,7 @@ export const StyledTetris = styled.div`
 
   aside {
     width: 100%;
-    max-width: 15em;
+    max-width: 12em;
     display: block;
     padding: 0 20px;
   }

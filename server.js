@@ -2,11 +2,26 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
-require("dotenv/config");
+
+if (process.env.NODE_ENV !== "production") require("dotenv").config();
+const port = process.env.PORT || 5000;
 
 //Middlewares
 app.use(cors());
 app.use(express.json());
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+
+  app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  });
+}
+
+app.listen(port, (error) => {
+  if (error) throw error;
+  console.log("Server running on port " + port);
+});
 
 //Import Routes
 const postsRoute = require("./routes/posts");
@@ -23,5 +38,3 @@ mongoose.connect(
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => console.log("connect to DB!")
 );
-
-app.listen(5000);
