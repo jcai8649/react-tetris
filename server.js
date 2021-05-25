@@ -12,6 +12,26 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//Import Routes
+const postsRoute = require("./routes/posts");
+app.use("/posts", postsRoute);
+
+//Routes
+app.get("/", (req, res) => {
+  res.send("Welcome to React-Tetris Server");
+});
+
+app.get("/api/hello", (req, res) => {
+  res.send({ express: "Hello From Express" });
+});
+
+//Connect to DB
+mongoose.connect(
+  process.env.DB_CONNECTION,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  () => console.log("connect to DB!")
+);
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
 
@@ -24,19 +44,3 @@ app.listen(port, (error) => {
   if (error) throw error;
   console.log("Server running on port " + port);
 });
-
-//Import Routes
-const postsRoute = require("./routes/posts");
-app.use("/posts", postsRoute);
-
-//Routes
-app.get("/", (req, res) => {
-  res.send("Welcome to React-Tetris Server");
-});
-
-//Connect to DB
-mongoose.connect(
-  process.env.DB_CONNECTION,
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  () => console.log("connect to DB!")
-);
