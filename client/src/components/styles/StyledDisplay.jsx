@@ -24,5 +24,6 @@ export const StyledDisplay = styled.div`
     &:not(:last-of-type) {
       max-height: 15px;
     }
+    max-width: 10em;
   }
 `;

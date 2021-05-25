@@ -24,11 +24,11 @@ export const StyledTetris = styled.div`
     padding: 0 20px;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 300px) {
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    max-width: 10em;
   }
 `;

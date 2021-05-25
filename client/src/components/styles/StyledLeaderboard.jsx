@@ -23,10 +23,6 @@ export const StyledLeaderboardContainer = styled.div`
   height: 25vh;
   max-width: 15em;
   overflow: auto;
-
-  @media (max-width: 600px) {
-    width: 30vw;
-  }
 `;
 
 export const StyledLeaderboardList = styled.ul`
