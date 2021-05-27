@@ -34,6 +34,10 @@ app.get("/", (req, res) => {
   res.send("Welcome to React-Tetris Server");
 });
 
+app.get("/api/hello", (req, res) => {
+  res.send({ express: "Hello From Express" });
+});
+
 //Connect to DB
 mongoose.connect(
   process.env.DB_CONNECTION,
