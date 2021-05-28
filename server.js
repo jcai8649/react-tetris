@@ -23,11 +23,6 @@ mongoose.connect(
 const postsRoute = require("./routes/posts");
 app.use("/posts", postsRoute);
 
-//Routes
-app.get("/", (req, res) => {
-  res.send("Welcome to React-Tetris Server");
-});
-
 app.get("/api/hello", (req, res) => {
   res.send({ express: "Hello From Express" });
 });
