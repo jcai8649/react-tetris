@@ -24,10 +24,6 @@ mongoose.connect(
 const postsRoute = require("./routes/posts");
 app.use("/posts", postsRoute);
 
-app.get("/api/hello", (req, res) => {
-  res.send({ express: "Hello From Express" });
-});
-
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
 
