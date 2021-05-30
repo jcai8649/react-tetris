@@ -5,7 +5,7 @@ export const StyledGithubWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-export const StyledGithubAchor = styled.a`
+export const StyledGithubAnchor = styled.a`
   margin-top: 10px;
   margin-right: 10px;
   width: 25px;

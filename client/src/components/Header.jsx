@@ -3,13 +3,13 @@ import Logo from "../asset/img/logo.png";
 import { AiOutlineGithub } from "react-icons/ai";
 import { BiCodeAlt } from "react-icons/bi";
 import { StyledHeader, StyledImg } from "./styles/StyledHeader";
-import { StyledGithubWrapper, StyledGithubAchor } from "./styles/StyledGithub";
+import { StyledGithubWrapper, StyledGithubAnchor } from "./styles/StyledGithub";
 
 const Header = () => {
   return (
     <>
       <StyledGithubWrapper>
-        <StyledGithubAchor
+        <StyledGithubAnchor
           href="https://github.com/jcai8649/react-tetris"
           rel="noreferrer"
           target="_blank"
@@ -25,8 +25,8 @@ const Header = () => {
               color: "white",
             }}
           />
-        </StyledGithubAchor>
-        <StyledGithubAchor
+        </StyledGithubAnchor>
+        <StyledGithubAnchor
           href="https://github.com/jcai8649"
           rel="noreferrer"
           target="_blank"
@@ -42,7 +42,7 @@ const Header = () => {
               color: "white",
             }}
           />
-        </StyledGithubAchor>
+        </StyledGithubAnchor>
       </StyledGithubWrapper>
       <StyledHeader>
         <StyledImg src={Logo} alt="Tetris Logo" />
