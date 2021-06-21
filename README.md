@@ -4,7 +4,11 @@ A classic Tetris game with score-keeping functionality allowing players to compe
 
 LIVE AT: https://cai-react-tetris.herokuapp.com
 
+<<<<<<< HEAD
 <img src='./misc/your_file.gif'>
+=======
+![Imgur](https://imgur.com/bVczN1L)
+>>>>>>> adad0105b3d311da43785e0b33a4d886545f73e5
 
 - Create custom React hooks to handle player movement, display, and stage rerenders.
 - Implement functions for tetromino rotations, collision detection, and row sweeping.
